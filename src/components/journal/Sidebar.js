@@ -11,9 +11,7 @@ export const Sidebar = () => {
                     <span> Manuel</span>
                 </h3>
 
-                <button
-                    className="btn"
-                >
+                <button className="btn">
                     Logout
                 </button>
             </div>

@@ -14,7 +14,6 @@ export const NoteAppBar = () => {
                     Save
                 </button>
             </div>
-
         </div>
     )
 }
