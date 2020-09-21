@@ -8,7 +8,7 @@ const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOO
 //STORE QUE CONCENTRA LOS REDUCERS 
 const reducers = combineReducers({
     auth: authReducer,
-    UI: uiReducer
+    ui: uiReducer
     
 });
 
