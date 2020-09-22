@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { BrowserRouter as Router, Redirect, Route, Switch } from "react-router-dom";
 import { login } from '../../actions/auth';
@@ -9,17 +9,30 @@ import { AuthRouter } from './AuthRouter';
 export const AppRouter = () => {
 
     const dispatch = useDispatch();
-    
+//Local state checks firebase status initialized in true
+    const [ checking, setChecking ] = useState(true);
+//Local state checks for user valid authentication
+    const [ isLoggedIn, setIsLoggedIn ] = useState(false);
+
 // Observable que va a estar pendientes en los cambios de autenticacion del usuario
     useEffect(() => {
         firebase.auth().onAuthStateChanged( ( user ) => {
             if ( user?.uid ) {
                 dispatch( login( user.uid, user.displayName ) );
+                setIsLoggedIn(true);
+            } else {
+                setIsLoggedIn(false);
             }
-
+            setChecking(false);
         });
 
-    }, [ dispatch ])
+    }, [ dispatch, setChecking, setIsLoggedIn ])
+
+    if ( checking ) {
+        return (
+            <h1>Espere...</h1>
+        )
+    }
 
     return (
         <Router>
