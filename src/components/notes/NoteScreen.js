@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import { useSelector } from 'react-redux'
 import { useForm } from '../../hooks/useForm';
 import { NoteAppBar } from './NoteAppBar'
@@ -6,9 +6,22 @@ import { NoteAppBar } from './NoteAppBar'
 export const NoteScreen = () => {
     //renombrando active a note
     const { active:note } = useSelector(state => state.notes);
-    const [ formValues, handleInputChange ] = useForm( note );
+    const [ formValues, handleInputChange, reset ] = useForm( note );
     const { body, title } = formValues;
-    console.log(formValues);
+
+// ejecutar esa accion solo si el id de la nota es diferente,
+// caso contrario no lo tengo que disparar
+    const activeId = useRef( note.id );
+//almacenar variable mutable que no re dibuja el componente si cambia
+    useEffect(() => {
+
+        if ( note.id !== activeId.current ) {
+            reset( note );
+            activeId.current = note.id
+        }
+        
+    }, [note, reset])
+    
     return (
         <div className="notes__main-content">
             <NoteAppBar />
