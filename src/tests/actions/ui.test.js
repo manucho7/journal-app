@@ -1,7 +1,7 @@
-import '@testing-library/jest-dom';
-import '@testing-library/dom';
 import { finishLoading, removeError, setError, startLoading } from '../../actions/ui';
 import { types } from '../../types/types';
+import '@testing-library/jest-dom';
+import '@testing-library/dom';
 
 describe('Pruebas en actions - ui', () => {
 
