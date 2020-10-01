@@ -57,5 +57,24 @@ describe('Pruebas en NoteScreen', () => {
 
     });
     
+    test('debe de disparar el active note', () => {
+        
+        wrapper.find('input[name="title"]').simulate('change', {
+            target: {
+                name: 'title',
+                value: 'Hola de nuevo'
+            }
+        });
 
+        expect( activeNote ).toHaveBeenLastCalledWith(
+            1234,
+            {
+                body: 'Mundo',
+                title: 'Hola de nuevo',
+                id: 1234,
+                date: 0
+            }
+        );
+    });
+    
 })
